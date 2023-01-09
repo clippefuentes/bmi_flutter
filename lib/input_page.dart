@@ -17,54 +17,30 @@ class _InputPageState extends State<InputPage> {
         children: [
           Expanded(child: Row(
             children: [
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                height: 200.00,
+              Expanded(child: ReusableCard(
                 width: 170.0,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 48, 47, 47),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+                colour: Color.fromARGB(255, 48, 47, 47),
               )),
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                height: 200.00,
+              Expanded(child: ReusableCard(
                 width: 170.0,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 48, 47, 47),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+                colour: Color.fromARGB(255, 48, 47, 47),
               ))
             ],
           )),
-          Expanded(child: Expanded(child: Container(
-            margin: EdgeInsets.all(15.0),
-            height: 200.00,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 48, 47, 47),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-          ))),
+          Expanded(child: Expanded(
+            child: ReusableCard(
+              colour: Color.fromARGB(255, 48, 47, 47),
+            )
+          )),
           Expanded(child: Row(
             children: [
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                height: 200.00,
+              Expanded(child: ReusableCard(
                 width: 170.0,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 48, 47, 47),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+                colour: Color.fromARGB(255, 48, 47, 47),
               )),
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                height: 200.00,
+              Expanded(child: ReusableCard(
                 width: 170.0,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 48, 47, 47),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+                colour: Color.fromARGB(255, 48, 47, 47),
               ))
             ],
           )),
@@ -75,4 +51,23 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
+class ReusableCard extends StatelessWidget {
+  
+  const ReusableCard({Key key, this.width, this.colour}) : super(key: key);
+  final Color colour;
+  final double width;
 
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15.0),
+      height: 200.00,
+      width: this.width,
+      decoration: BoxDecoration(
+        color: this.colour,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    );
+  }
+}
