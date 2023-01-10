@@ -1,5 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'card_gender_content.dart';
+import 'reusable_card.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -20,10 +24,18 @@ class _InputPageState extends State<InputPage> {
               Expanded(child: ReusableCard(
                 width: 170.0,
                 colour: Color.fromARGB(255, 48, 47, 47),
+                cardChild: CardGenderContent(
+                  icon: FontAwesomeIcons.mars,
+                  text: 'MALE'
+                ),
               )),
               Expanded(child: ReusableCard(
                 width: 170.0,
                 colour: Color.fromARGB(255, 48, 47, 47),
+                cardChild: CardGenderContent(
+                  icon: FontAwesomeIcons.venus,
+                  text: 'FEMALE'
+                ),
               ))
             ],
           )),
@@ -51,23 +63,3 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class ReusableCard extends StatelessWidget {
-  
-  const ReusableCard({Key key, this.width, this.colour}) : super(key: key);
-  final Color colour;
-  final double width;
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      height: 200.00,
-      width: this.width,
-      decoration: BoxDecoration(
-        color: this.colour,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    );
-  }
-}
