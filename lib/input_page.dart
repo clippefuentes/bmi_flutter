@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'constants.dart';
 import 'card_gender_content.dart';
 import 'reusable_card.dart';
 
-const activeCardColour = Color.fromARGB(255, 31, 30, 30);
-const inActiveCardColour = Color.fromARGB(255, 50, 49, 49);
+
 
 class InputPage extends StatefulWidget {
   @override
@@ -18,31 +18,10 @@ enum Gender {
   Female
 }
 class _InputPageState extends State<InputPage> {
-  Color maleCardColour = inActiveCardColour;
-  Color femaleCardColour = inActiveCardColour;
+  Color maleCardColour = kInActiveCardColour;
+  Color femaleCardColour = kInActiveCardColour;
   Gender gender;
-
-  void updateColour(Gender gender) {
-    // 1 == male
-    // 2 == female
-    if (gender == 1) {
-      if (maleCardColour == inActiveCardColour) {
-        maleCardColour = activeCardColour;
-        femaleCardColour = inActiveCardColour;
-      } else {
-        maleCardColour = inActiveCardColour;
-      }
-    } 
-    
-    if (gender == 2) {
-      if (femaleCardColour == inActiveCardColour) {
-        femaleCardColour = activeCardColour;
-        maleCardColour = inActiveCardColour;
-      } else {
-        femaleCardColour = inActiveCardColour;
-      }
-    }
-  }
+  double heightValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +30,7 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(child: Row(
             children: [
@@ -62,7 +42,7 @@ class _InputPageState extends State<InputPage> {
                     });
                   },
                   width: 170.0,
-                  colour: gender == Gender.Male ? activeCardColour : inActiveCardColour,
+                  colour: gender == Gender.Male ? kActiveCardColour : kInActiveCardColour,
                   cardChild: CardGenderContent(
                     icon: FontAwesomeIcons.mars,
                     text: 'MALE'
@@ -77,7 +57,7 @@ class _InputPageState extends State<InputPage> {
                     });
                   },
                   width: 170.0,
-                  colour: gender == Gender.Female ? activeCardColour : inActiveCardColour,
+                  colour: gender == Gender.Female ? kActiveCardColour : kInActiveCardColour,
                   cardChild: CardGenderContent(
                     icon: FontAwesomeIcons.venus,
                     text: 'FEMALE'
@@ -89,20 +69,51 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: ReusableCard(
               // width: double.infinity,
-              colour: inActiveCardColour,
-              cardChild: Container(),
+              colour: kInActiveCardColour,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Height',
+                    style: kLabelTextStyle,  
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(heightValue.toString(),
+                        style: kNumberTextStyle
+                      ),
+                      Text('cm',
+                        style: kLabelTextStyle
+                      ),
+                    ],
+                  ),
+                  Slider(
+                    value: heightValue,
+                    onChanged: (value) {
+                      setState(() {
+                        heightValue = value.round().toDouble();
+                      });
+                    },
+                    min: kMinHeight,
+                    max: kMaxHeight,
+                  )
+                ],
+              ),
             )
           ),
           Expanded(child: Row(
             children: [
               Expanded(child: ReusableCard(
                 width: 170.0,
-                colour: inActiveCardColour,
+                colour: kInActiveCardColour,
                 cardChild: Container(),
               )),
               Expanded(child: ReusableCard(
                 width: 170.0,
-                colour: inActiveCardColour,
+                colour: kInActiveCardColour,
                 cardChild: Container(),
               ))
             ],
