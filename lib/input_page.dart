@@ -207,8 +207,23 @@ class _InputPageState extends State<InputPage> {
               ))
             ],
           )),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/results');
+            },
+            child: Container(
+              child: Text('Calculate', 
+                style: TextStyle(
+                  color: Colors.white
+                ),
+              ),
+              color: Colors.red,
+              margin: EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: 50,
+            )
+          )
         ],
-        
       ),
     );
   }
