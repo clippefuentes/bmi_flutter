@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 const kActiveCardColour = Color.fromARGB(255, 31, 30, 30);
 const kInActiveCardColour = Color.fromARGB(255, 50, 49, 49);
@@ -11,6 +12,7 @@ const kLabelTextStyle = TextStyle(
 const kNumberTextStyle = TextStyle(
   fontSize: 50.0,
   fontWeight: FontWeight.w900,
+  color: Colors.white
 );
 
 const kMinHeight = 0.0;
