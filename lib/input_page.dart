@@ -5,6 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'constants.dart';
 import 'card_gender_content.dart';
 import 'reusable_card.dart';
+import 'bottom_button.dart';
+import 'round_icon_button.dart';
 
 
 
@@ -207,21 +209,12 @@ class _InputPageState extends State<InputPage> {
               ))
             ],
           )),
-          GestureDetector(
-            onTap: () {
+          BottomButton(
+            // route: '/results',
+            onPressed: () {
               Navigator.pushNamed(context, '/results');
             },
-            child: Container(
-              child: Text('Calculate', 
-                style: TextStyle(
-                  color: Colors.white
-                ),
-              ),
-              color: Colors.red,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: 50,
-            )
+            title: 'Calculate'
           )
         ],
       ),
@@ -230,27 +223,3 @@ class _InputPageState extends State<InputPage> {
 }
 
 
-class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({
-    Key key,
-    this.icon,
-    this.onPress
-  }) : super(key: key);
-
-  final IconData icon;
-  final Function onPress;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      shape: CircleBorder(),
-      fillColor: Color.fromARGB(255, 87, 86, 86),
-      onPressed: onPress,
-    );
-  }
-}
