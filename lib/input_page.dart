@@ -1,4 +1,5 @@
 
+import 'package:bmi_calculator/calculator_brain.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -7,6 +8,7 @@ import 'card_gender_content.dart';
 import 'reusable_card.dart';
 import 'bottom_button.dart';
 import 'round_icon_button.dart';
+import 'results_page.dart';
 
 
 
@@ -23,8 +25,8 @@ class _InputPageState extends State<InputPage> {
   Color maleCardColour = kInActiveCardColour;
   Color femaleCardColour = kInActiveCardColour;
   Gender gender;
-  double heightValue = 0;
-  double weightValue = 0;
+  int heightValue = 0;
+  int weightValue = 0;
   int age = 0;
 
   @override
@@ -105,10 +107,10 @@ class _InputPageState extends State<InputPage> {
                       thumbColor: Colors.white
                     ),
                     child: Slider(
-                      value: heightValue,
+                      value: heightValue.toDouble(),
                       onChanged: (value) {
                         setState(() {
-                          heightValue = value.round().toDouble();
+                          heightValue = value.round();
                         });
                       },
                       min: kMinHeight,
@@ -212,7 +214,24 @@ class _InputPageState extends State<InputPage> {
           BottomButton(
             // route: '/results',
             onPressed: () {
-              Navigator.pushNamed(context, '/results');
+              CalculatorBrain calc = CalculatorBrain(
+                height: heightValue,
+                weight: weightValue,
+              );
+
+              String currentBMI = calc.calculateBMI();
+              String currentResult = calc.getResult();
+              String currentInterpretation = calc.getInterpretation();
+              print("$currentBMI \n $currentResult \n $currentInterpretation");
+              Navigator.pushNamed(
+                context,
+                '/results',
+                arguments: ResultsArguments(
+                  bmiResult: currentBMI,
+                  interpretation: currentInterpretation,
+                  resultText: currentResult,
+                )
+              );
             },
             title: 'Calculate'
           )
@@ -221,5 +240,4 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
 
